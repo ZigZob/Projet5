@@ -26,3 +26,13 @@ let slideRight = document.querySelector(".arrow_right");
 slideRight.addEventListener("click", () => {
 	console.log("le bouton est cliqué")
 });
+
+let dots = document.querySelector(".dots");
+for (let i = 0; i < slides.length; i++) {
+	let dot = document.createElement("div");
+	dot.classList.add("dot");
+	dots.appendChild(dot);
+}
+
+
+
