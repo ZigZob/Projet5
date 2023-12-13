@@ -29,9 +29,9 @@ slideRight.addEventListener("click", () => {
 
 let dots = document.querySelector(".dots");
 for (let i = 0; i < slides.length; i++) {
-	let dot = document.createElement("div");
-	dot.classList.add("dot");
-	dots.appendChild(dot);
+	let dot = document.createElement("div")
+	dot.classList.add("dot")
+	dots.appendChild(dot)
 }
 
 
