@@ -77,7 +77,7 @@ arrowLeft.addEventListener("click", () => {
 arrowRight.addEventListener("click", () => {
 	console.log("le bouton droit est cliqué")
 	i++
-	if (i > 3) {
+	if (i > (slides.length - 1)) {
 		i = 0
 		dotList[slides.length - 1].classList.remove("dot_selected")
 		dotList[i].classList.add("dot_selected")
