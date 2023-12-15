@@ -56,6 +56,7 @@ function changeSlide(slideObjectImg, slideObjectTagLine) {
 }
 
 //eventListener des flèches
+//gauche
 arrowLeft.addEventListener("click", () => {
 	console.log("le bouton gauche est cliqué")
 	i--
@@ -73,7 +74,7 @@ arrowLeft.addEventListener("click", () => {
 		console.log(i)
 	}
 });
-
+//droite
 arrowRight.addEventListener("click", () => {
 	console.log("le bouton droit est cliqué")
 	i++
@@ -91,14 +92,3 @@ arrowRight.addEventListener("click", () => {
 		console.log(i)
 	}
 });
-
-
-
-
-
-
-// //slides.forEach(createSlide); // vs slides.forEach(createSlide, createDot); ?
-// 
-
-
-
