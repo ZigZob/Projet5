@@ -37,32 +37,35 @@ const dotList = Array.from(dots.children)
 let indexPosition = 0
 
 //initialization de dot_selected
-dotList[0].classList.add("dot_selected")
+dotList[indexPosition].classList.add("dot_selected")
 
-//simulation du modulo via l'opérateur remainder
+//simulation du modulo via l'opérateur remainder pour le défilement infini
 function modulo(value) {
 	return ((value % slides.length) + slides.length) % slides.length
 }
 
 //initialization des flèches v2
-// let arrowsNodeList = banner.querySelectorAll(".arrow")
-// let arrows = Array.from(banner.querySelectorAll(".arrow"))
+let arrowsNodeList = banner.querySelectorAll(".arrow")
+let arrows = Array.from(banner.querySelectorAll(".arrow"))
 
 //initialisation des flèches
-let arrowLeft = banner.querySelector(".arrow_left")
-let arrowRight = banner.querySelector(".arrow_right")
+// let arrowLeft = banner.querySelector(".arrow_left")
+// let arrowRight = banner.querySelector(".arrow_right")
 
 //fonction changeSlide
-function changeSlide(slideObjectImg, slideObjectTagLine) {
+function changeBannerImg(slideObjectImg) {
 	let bannerImg = banner.querySelector(".banner-img")
 	bannerImg.src = "./assets/images/slideshow/" + slideObjectImg;
+}
+function changeBannerTagLine(slideObjectTagLine) {
 	let bannerTagLine = banner.getElementsByTagName("p")
 	bannerTagLine[0].innerHTML = slideObjectTagLine
 }
 
 //mise a jour the contenu de la nouvelle slide
 function updateSlideContent() {
-	changeSlide(slides[modulo(indexPosition)].image, slides[modulo(indexPosition)].tagLine)
+	changeBannerImg(slides[modulo(indexPosition)].image)
+	changeBannerTagLine(slides[modulo(indexPosition)].tagLine)
 }
 
 //retrait de la class .dot_selected avant le changement de slide
@@ -85,31 +88,26 @@ function moveToNextSlide() {
 	indexPosition++
 }
 
+//modification de l'eventListener en fonction de la fleche cliquée
+function leftOrRight(arrow) {
+	switch (arrow.classList[1]) {
+		case "arrow_left":
+			moveToPreviousSlide()
+			console.log("le bouton gauche est cliqué")
+			break
+		case "arrow_right":
+			moveToNextSlide()
+			console.log("le bouton droit est cliqué")
+			break
+	}
+}
+
 //eventListener des flèches
-
-arrowLeft.addEventListener("click", () => {
-	console.log("le bouton gauche est cliqué")
-	removeCurrentSelectedDot()
-	moveToPreviousSlide()
-	addCurrentSelectedDot()
-	updateSlideContent()
+arrows.forEach((arrow) => {
+	arrow.addEventListener("click", () => {
+		removeCurrentSelectedDot()
+		leftOrRight(arrow)
+		addCurrentSelectedDot()
+		updateSlideContent()
+	})
 });
-
-arrowRight.addEventListener("click", () => {
-	console.log("le bouton droite est cliqué")
-	removeCurrentSelectedDot()
-	moveToNextSlide()
-	addCurrentSelectedDot()
-	updateSlideContent()
-});
-
-// arrows.forEach((arrow) => {
-// 	arrow.addEventListener("click", () => {
-// 		console.log("le bouton gauche est cliqué")
-// 		removeCurrentSelectedDot()
-// 		if (arrow.target)
-// 			moveToPreviousSlide()
-// 		addCurrentSelectedDot()
-// 		updateSlideContent()
-// 	})
-// });
