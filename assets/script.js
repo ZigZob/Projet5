@@ -27,9 +27,8 @@ const banner = document.getElementById("banner")
 slides.forEach(() => {
 	let dot = document.createElement("div")
 	dot.classList.add("dot")
-	banner.querySelector(".dots").append(dot)
+	banner.querySelector(".dots").append(dot) // est ce que dots est quand meme initialisé ici ?
 });
-
 //création de l'array de dots length===slides.length
 const dotList = Array.from(banner.querySelector(".dots").children)
 
