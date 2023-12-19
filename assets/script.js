@@ -20,18 +20,18 @@ const slides = [
 //initialisation du parent
 const banner = document.getElementById("banner")
 
-//initialisation des dots
-let dots = banner.querySelector(".dots")
+//initialisation des dots (obsolete, a discuter)
+//let dots = banner.querySelector(".dots")
 
 //création des dot
 slides.forEach(() => {
 	let dot = document.createElement("div")
 	dot.classList.add("dot")
-	dots.append(dot)
+	banner.querySelector(".dots").append(dot)
 });
 
 //création de l'array de dots length===slides.length
-const dotList = Array.from(dots.children)
+const dotList = Array.from(banner.querySelector(".dots").children)
 
 //initialisation de l'index
 let indexPosition = 0
@@ -39,30 +39,25 @@ let indexPosition = 0
 //initialization de dot_selected
 dotList[indexPosition].classList.add("dot_selected")
 
+//initialization des flèches v2
+// let arrows = Array.from(banner.querySelectorAll(".arrow"))
+
 //simulation du modulo via l'opérateur remainder pour le défilement infini
 function modulo(value) {
 	return ((value % slides.length) + slides.length) % slides.length
 }
 
-//initialization des flèches v2
-let arrowsNodeList = banner.querySelectorAll(".arrow")
-let arrows = Array.from(banner.querySelectorAll(".arrow"))
-
-//initialisation des flèches
-// let arrowLeft = banner.querySelector(".arrow_left")
-// let arrowRight = banner.querySelector(".arrow_right")
-
-//fonction changeSlide
+//assignation de la source de la bannerImg
 function changeBannerImg(slideObjectImg) {
-	let bannerImg = banner.querySelector(".banner-img")
-	bannerImg.src = "./assets/images/slideshow/" + slideObjectImg;
-}
-function changeBannerTagLine(slideObjectTagLine) {
-	let bannerTagLine = banner.getElementsByTagName("p")
-	bannerTagLine[0].innerHTML = slideObjectTagLine
+	banner.querySelector(".banner-img").src = "./assets/images/slideshow/" + slideObjectImg;
 }
 
-//mise a jour the contenu de la nouvelle slide
+//assignation du contenu texte du titre
+function changeBannerTagLine(slideObjectTagLine) {
+	banner.getElementsByTagName("p")[0].innerHTML = slideObjectTagLine
+}
+
+//mise a jour du contenu de la nouvelle slide
 function updateSlideContent() {
 	changeBannerImg(slides[modulo(indexPosition)].image)
 	changeBannerTagLine(slides[modulo(indexPosition)].tagLine)
@@ -102,12 +97,28 @@ function leftOrRight(arrow) {
 	}
 }
 
+//eventListener des flèches v2
+// arrows.forEach((arrow) => {
+// 	arrow.addEventListener("click", () => {
+// 		removeCurrentSelectedDot()
+// 		leftOrRight(arrow)
+// 		addCurrentSelectedDot()
+// 		updateSlideContent()
+// 	})
+// });
+
 //eventListener des flèches
-arrows.forEach((arrow) => {
-	arrow.addEventListener("click", () => {
-		removeCurrentSelectedDot()
-		leftOrRight(arrow)
-		addCurrentSelectedDot()
-		updateSlideContent()
-	})
-});
+function arrowEventListeners() {
+	let arrows = Array.from(banner.querySelectorAll(".arrow"))
+	arrows.forEach((arrow) => {
+		arrow.addEventListener("click", () => {
+			removeCurrentSelectedDot()
+			leftOrRight(arrow)
+			addCurrentSelectedDot()
+			updateSlideContent()
+		})
+	});
+}
+
+//initialisation des eventListeners
+arrowEventListeners()
