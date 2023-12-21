@@ -38,6 +38,7 @@ dotList[carouselPosition].classList.add("dot_selected")
 //simulation du modulo via l'opérateur remainder pour le défilement infini
 function modulo(value) {
 	return ((value % slides.length) + slides.length) % slides.length
+	//return (Math.abs(value % slides.length)) //alternative
 }
 
 //assignation de la source de la bannerImg
