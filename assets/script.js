@@ -20,14 +20,11 @@ const slides = [
 //initialisation du parent
 const banner = document.getElementById("banner")
 
-//initialisation des dots (obsolete, a discuter)
-//let dots = banner.querySelector(".dots")
-
 //création des dot
 slides.forEach(() => {
 	let dot = document.createElement("div")
 	dot.classList.add("dot")
-	banner.querySelector(".dots").append(dot) // est ce que dots est quand meme initialisé ici ?
+	banner.querySelector(".dots").append(dot)
 });
 //création de l'array de dots length===slides.length
 const dotList = Array.from(banner.querySelector(".dots").children)
@@ -37,9 +34,6 @@ let carouselPosition = 0
 
 //initialization de dot_selected
 dotList[carouselPosition].classList.add("dot_selected")
-
-//initialization des flèches v2
-// let arrows = Array.from(banner.querySelectorAll(".arrow"))
 
 //simulation du modulo via l'opérateur remainder pour le défilement infini
 function modulo(value) {
@@ -94,16 +88,6 @@ function leftOrRight(arrow) {
 	}
 }
 
-//eventListener des flèches v2
-// arrows.forEach((arrow) => {
-// 	arrow.addEventListener("click", () => {
-// 		removeCurrentSelectedDot()
-// 		leftOrRight(arrow)
-// 		addCurrentSelectedDot()
-// 		updateSlideContent()
-// 	})
-// });
-
 //eventListener des flèches
 function arrowEventListeners() {
 	let arrows = Array.from(banner.querySelectorAll(".arrow"))
@@ -117,5 +101,5 @@ function arrowEventListeners() {
 	});
 }
 
-//initialisation des eventListeners
+//initialisation des eventListeners sans garder l'array de fleches en memoire
 arrowEventListeners()
